@@ -28,7 +28,7 @@ char	*ft_strchr_gnl(const char *s, int c)
 	unsigned int	i;
 
 	i = 0;
-	cc = (char) c;
+	cc = (char)c;
 	while (s[i] != '\0')
 	{
 		if (s[i] == cc)
@@ -50,7 +50,8 @@ char	*ft_strjoin_gnl(char *str1, char *str2)
 	j = -1;
 	if (!str1 && !str2)
 		return (NULL);
-	str = malloc((ft_strlen_gnl(str1) + ft_strlen_gnl(str2) + 1) * sizeof(char));
+	str = malloc((ft_strlen_gnl(str1) + ft_strlen_gnl(str2) + 1)
+			* sizeof(char));
 	if (!str)
 		return (NULL);
 	while (str1[++i])
@@ -58,7 +59,7 @@ char	*ft_strjoin_gnl(char *str1, char *str2)
 	while (str2[++j])
 		str[i++] = str2[j];
 	str[i] = '\0';
-	ft_free (&str1);
+	ft_free(&str1);
 	return (str);
 }
 

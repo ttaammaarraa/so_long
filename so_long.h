@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:02:28 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/01/30 20:56:30 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/01 22:08:55 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,5 @@
 
 void    free_map(char **map);
 void    error(char *str);
+void	check_wall_2(char **map);
 #endif

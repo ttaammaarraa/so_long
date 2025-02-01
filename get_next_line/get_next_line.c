@@ -26,7 +26,7 @@ char	*fill(int fd, char *re, char *buff, int *bytes_read)
 {
 	char	*temp;
 
-	*bytes_read = read (fd, buff, BUFFER_SIZE);
+	*bytes_read = read(fd, buff, BUFFER_SIZE);
 	if (*bytes_read == -1)
 	{
 		ft_free(&buff);
@@ -84,7 +84,7 @@ char	*extract(char **re, char **line)
 			return (ft_free(re));
 		temp = ft_strdup_gnl(newline_pos + 1);
 		if (!temp)
-		{ 
+		{
 			ft_free(line);
 			return (ft_free(re));
 		}
