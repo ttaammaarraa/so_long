@@ -24,12 +24,12 @@
 #  define BUFFER_SIZE 10
 # endif
 
-int		t_strlen(char *str);
-char	*t_strchr(const char *s, int c);
-char	*t_strjoin(char *str1, char *str2);
-char	*t_strdup(char *str1);
-char	*t_substr(char *s, unsigned int start, size_t len);
+int		ft_strlen_gnl(char *str);
+char	*ft_strchr_gnl(const char *s, int c);
+char	*ft_strjoin_gnl(char *str1, char *str2);
+char	*ft_strdup_gnl(char *str1);
+char	*ft_substr_gnl(char *s, unsigned int start, size_t len);
 char	*get_next_line(int fd);
-void	*t_free(char **buff);
+void	*ft_free(char **buff);
 
 #endif

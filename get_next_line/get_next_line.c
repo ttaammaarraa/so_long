@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-void	*t_free(char **buff)
+void	*ft_free(char **buff)
 {
 	if (*buff)
 	{
@@ -29,24 +29,24 @@ char	*fill(int fd, char *re, char *buff, int *bytes_read)
 	*bytes_read = read (fd, buff, BUFFER_SIZE);
 	if (*bytes_read == -1)
 	{
-		t_free(&buff);
-		return (t_free(&re));
+		ft_free(&buff);
+		return (ft_free(&re));
 	}
 	buff[*bytes_read] = '\0';
 	if (re)
 	{
-		temp = t_strjoin(re, buff);
+		temp = ft_strjoin_gnl(re, buff);
 		if (!temp)
 		{
-			t_free(&buff);
-			return (t_free(&re));
+			ft_free(&buff);
+			return (ft_free(&re));
 		}
 		re = temp;
 	}
 	else
-		re = t_strdup(buff);
+		re = ft_strdup_gnl(buff);
 	if (!re)
-		return (t_free(&buff));
+		return (ft_free(&buff));
 	return (re);
 }
 
@@ -64,10 +64,10 @@ char	*read_line(int fd, char *re)
 		re = fill(fd, re, buff, &bytes_read);
 		if (!re)
 			return (NULL);
-		if (t_strchr(re, '\n'))
+		if (ft_strchr_gnl(re, '\n'))
 			break ;
 	}
-	t_free(&buff);
+	ft_free(&buff);
 	return (re);
 }
 
@@ -76,25 +76,25 @@ char	*extract(char **re, char **line)
 	char	*temp;
 	char	*newline_pos;
 
-	newline_pos = t_strchr(*re, '\n');
+	newline_pos = ft_strchr_gnl(*re, '\n');
 	if (newline_pos)
 	{
-		*line = t_substr(*re, 0, newline_pos - *re + 1);
+		*line = ft_substr_gnl(*re, 0, newline_pos - *re + 1);
 		if (!*line)
-			return (t_free(re));
-		temp = t_strdup(newline_pos + 1);
+			return (ft_free(re));
+		temp = ft_strdup_gnl(newline_pos + 1);
 		if (!temp)
 		{ 
-			t_free(line);
-			return (t_free(re));
+			ft_free(line);
+			return (ft_free(re));
 		}
-		t_free(re);
+		ft_free(re);
 		*re = temp;
 	}
 	else
 	{
-		*line = t_strdup(*re);
-		t_free(re);
+		*line = ft_strdup_gnl(*re);
+		ft_free(re);
 		*re = NULL;
 	}
 	return (*line);
@@ -110,7 +110,7 @@ char	*get_next_line(int fd)
 	re = read_line(fd, re);
 	if (!re)
 		return (NULL);
-	if (t_strchr(re, '\n'))
+	if (ft_strchr_gnl(re, '\n'))
 	{
 		if (!extract(&re, &line))
 			return (NULL);
@@ -118,11 +118,11 @@ char	*get_next_line(int fd)
 	}
 	if (*re)
 	{
-		line = t_strdup(re);
-		t_free(&re);
+		line = ft_strdup_gnl(re);
+		ft_free(&re);
 		return (line);
 	}
-	t_free(&re);
+	ft_free(&re);
 	return (NULL);
 }
 /*

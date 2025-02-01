@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-int	t_strlen(char *str)
+int	ft_strlen_gnl(char *str)
 {
 	int	i;
 
@@ -22,7 +22,7 @@ int	t_strlen(char *str)
 	return (i);
 }
 
-char	*t_strchr(const char *s, int c)
+char	*ft_strchr_gnl(const char *s, int c)
 {
 	char			cc;
 	unsigned int	i;
@@ -40,7 +40,7 @@ char	*t_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*t_strjoin(char *str1, char *str2)
+char	*ft_strjoin_gnl(char *str1, char *str2)
 {
 	char	*str;
 	int		i;
@@ -50,7 +50,7 @@ char	*t_strjoin(char *str1, char *str2)
 	j = -1;
 	if (!str1 && !str2)
 		return (NULL);
-	str = malloc((t_strlen(str1) + t_strlen(str2) + 1) * sizeof(char));
+	str = malloc((ft_strlen_gnl(str1) + ft_strlen_gnl(str2) + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	while (str1[++i])
@@ -58,17 +58,17 @@ char	*t_strjoin(char *str1, char *str2)
 	while (str2[++j])
 		str[i++] = str2[j];
 	str[i] = '\0';
-	t_free (&str1);
+	ft_free (&str1);
 	return (str);
 }
 
-char	*t_strdup(char *str1)
+char	*ft_strdup_gnl(char *str1)
 {
 	int		i;
 	char	*dest;
 
 	i = 0;
-	dest = malloc((t_strlen(str1) + 1) * sizeof(char));
+	dest = malloc((ft_strlen_gnl(str1) + 1) * sizeof(char));
 	if (!dest)
 		return (NULL);
 	while (str1[i])
@@ -80,16 +80,16 @@ char	*t_strdup(char *str1)
 	return (dest);
 }
 
-char	*t_substr(char *s, unsigned int start, size_t len)
+char	*ft_substr_gnl(char *s, unsigned int start, size_t len)
 {
 	char	*substr;
 	size_t	i;
 	size_t	len_s;
 
-	len_s = t_strlen(s);
+	len_s = ft_strlen_gnl(s);
 	if (!s || start >= len_s)
-		return (t_strdup(""));
-	if (len > t_strlen(s) - start)
+		return (ft_strdup_gnl(""));
+	if (len > ft_strlen_gnl(s) - start)
 		len = len_s - start;
 	substr = malloc((len + 1) * sizeof(char));
 	if (!substr)
