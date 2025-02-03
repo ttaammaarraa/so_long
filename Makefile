@@ -1,7 +1,7 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 NAME = so_long
-SRC = main.c ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c
+SRC = test.c ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c
 OBJ = obj
 LIBFT = ./libft
 MLX = ./minilibx-linux

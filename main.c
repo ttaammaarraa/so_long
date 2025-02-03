@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:01:57 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/01 22:54:18 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:52:42 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ char	**read_map(char *filename)
 		error("Error\nFailed to open the file.\n");
 	map = NULL;
 	lines = 0;
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		if (line[0] == '\0')
 		{
@@ -48,6 +49,8 @@ char	**read_map(char *filename)
 		if (!map)
 			error("Error\nMemory allocation failed.\n");
 		map[lines++] = line;
+		line = get_next_line(fd);
+
 	}
 	close(fd);
 	if (!map)
@@ -216,9 +219,9 @@ void	check_wall_1(char **map)
 	height = 0;
 	while (map[height])
 		height++;
- 	while (i < width )
- 	{
-		if (map[0][i] != '1' || map[height -1][i] != '1')
+	while (i < width)
+	{
+		if (map[0][i] != '1' || map[height - 1][i] != '1')
 		{
 			free_map(map);
 			error("Error\nMap is not closed by walls\n");
@@ -239,10 +242,10 @@ void	check_wall_2(char **map)
 	height = 0;
 	while (map[height])
 		height++;
-	while(i < height)
+	while (i < height)
 	{
-		  if (map[i][0] != '1' || map[i][width - 1] != '1')
-        {
+		if (map[i][0] != '1' || map[i][width - 1] != '1')
+		{
 			free_map(map);
 			error("Error\nMap is not closed by walls\n");
 		}
