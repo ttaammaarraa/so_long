@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/25 14:41:03 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/03 17:20:15 by taabu-fe         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "so_long.h"
 
 int	init_window(t_window *win)
@@ -20,19 +8,30 @@ int	init_window(t_window *win)
 	win->mlx_win = mlx_new_window(win->mlx, 900, 800, "so_long");
 	if(!win->mlx_win)
 	{
+	
 		free(win->mlx);
 		return (1);
 	}
 	return (0);
 }
-int main(void)
+void close_window(t_window *win)
 {
-    t_window win;
-
-    if (init_window(&win))
-        return (1);
-    mlx_loop(win.mlx);
-/*     mlx_destroy_window(win.mlx, win.mlx_win);
-    mlx_destroy_display(win.mlx); */
-    free(win.mlx);
+	mlx_destroy_window(win->mlx, win->mlx_win);
+	mlx_destroy_display(win->mlx);
+	free(win->mlx);
+	exit(EXIT_SUCCESS);
+	
 }
+void	key_hook(int keycode, t_window *win)
+{
+	if (keycode == XK_Escape || keycode == XK_q)
+		close_window(win);
+}
+int		key_hook1(int keycode, t_window *win)
+{
+	(void)win;
+	printf("Hello from key_hook!\n%d\n", keycode);
+	return (0);
+}
+
+

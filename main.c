@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:01:57 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/03 13:52:42 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:34:06 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,6 +256,7 @@ void	check_wall_2(char **map)
 int	main(int argc, char **argv)
 {
 	char	**map;
+	t_window	win;
 
 	if (argc != 2)
 		error("Error\nToo Few Arguments\n");
@@ -268,6 +269,15 @@ int	main(int argc, char **argv)
 	is_valid_exit(map);
 	is_valid_collectable(map);
 	is_valid_player(map);
+    if (init_window(&win))
+	{
+        return (1);	
+	}
+	
+	mlx_hook(win.mlx_win, 2, 1L<<0, key_hook1, &win);
 	free_map(map);
+	mlx_key_hook(win.mlx_win, key_hook, &win);
+	mlx_hook(win.mlx_win, 17, 0, close_window, &win);
+    mlx_loop(win.mlx);
 	return (0);
 }
