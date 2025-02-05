@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:01:57 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/05 10:11:57 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/05 10:25:45 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ends_with_ber(const char *str)
 
 char	**read_map(char *filename)
 {
-	int		fd;+
+	int		fd;
 	char	*line;
 	char	**map;
 	int		lines;
