@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: malja-fa <malja-fa@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:01:57 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/05 10:25:45 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:24:33 by malja-fa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,19 +258,18 @@ int	main(int argc, char **argv)
 {
 	char	**map;
 	t_window	win;
+	
 	if (argc != 2)
 		error("Error\nToo Few Arguments\n");
 	if (!ends_with_ber(argv[1]))
 		error("Error\nThe file must have a .ber extension.\n");
 
-	// ✅ قراءة الخريطة وتخزينها في map
 	map = read_map(argv[1]);
 	if (!map)
 		error("Error\nFailed to load the map.\n");
 
-	print_map(map);  // ✅ تأكد من أن الخريطة تمت قراءتها قبل تخزينها في `win`
+	print_map(map);
 
-	// ✅ إسناد `map` إلى `win->map` قبل استخدامه
 	win.map = map;
 
 	rectangular(map);
@@ -282,15 +281,15 @@ int	main(int argc, char **argv)
 	if (init_window(&win))
 		return (1);
 
-	load_images(&win);  // ✅ تحميل الصور بشكل صحيح
-	render_map(&win);   // ✅ رسم الخريطة بعد تحميل الصور
+	load_images(&win);
+	render_map(&win);
 
 	mlx_hook(win.mlx_win, 2, 1L<<0, key_hook1, &win);
 	mlx_key_hook(win.mlx_win, key_hook, &win);
 	mlx_hook(win.mlx_win, 17, 0, close_window, &win);
 
 	mlx_loop(win.mlx);
-	free_map(map);  // ✅ تأكد من تحرير الذاكرة بعد انتهاء اللعبة
+	free_map(map);
 
 	return (0);
 }
