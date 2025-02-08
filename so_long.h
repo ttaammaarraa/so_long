@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:02:28 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/04 20:32:26 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/07 20:26:52 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ typedef struct s_window
     void    *mlx_win;
 	int		img_width;
 	int		img_height;
+	int		collectibles;
+	int		player_x;
+	int		player_y;
+	int     moves;
     t_data  img;
 	char    **map;
 }   t_window;
@@ -59,10 +63,14 @@ void	check_wall_2(char **map);
 void	load_images(t_window *win);
 void	render_map(t_window *win);
 int     key_hook(int keycode, t_window *win);
-int    close_window(t_window *win);
+int		close_window(t_window *win);
 int     init_window(t_window *win);
 int     key_hook1(int keycode, t_window *win);
-
-
-
+void	find_player_position(t_window *win);
+int		count_collectibles(char **map);
+void load_images(t_window *win);
+void render_map(t_window *win);
+void move_player(t_window *win, int x, int y);
+int key_hook(int keycode, t_window *win);
+int key_hook1(int keycode, t_window *win);
 #endif
