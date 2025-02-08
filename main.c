@@ -1,18 +1,56 @@
 #include "so_long.h"
 
-int	ends_with_ber(const char *str)
+int	not_ends_with_ber(const char *str)
 {
 	size_t	len;
-
+	char	*dot;
+	dot = ft_strrchr(str, '.');
 	len = ft_strlen(str);
 	if (len < 4)
 		return (0);
-	if (ft_strncmp(str + len - 4, ".ber", 4) == 0)
-		return (1);
+	if (!(ft_strcmp(dot, ".ber") == 0))
+		error("Error\nwqer");
 	return (0);
 }
 
-char	**read_map(char *filename)
+char **read_map1(int fd)
+{
+    char    *line;
+    char    **map;
+    int     lines;
+
+	map = NULL;
+	lines = 0;
+    line = get_next_line(fd);
+    while (line)
+    {
+        if (line[0] == '\0')
+        {
+            free(line);
+            break;
+        }
+        map = ft_realloc(map, lines * sizeof(char *), (lines + 2) * sizeof(char *));
+        if (!map)
+            error("Error\nMemory allocation failed.\n");
+        map[lines++] = line;
+        line = get_next_line(fd);
+    }
+    if (!map)
+        error("Error\nEmpty map file\n");
+    map[lines] = NULL;
+    return map;
+}
+
+char **read_map(char *filename)
+{
+    int fd = open(filename, O_RDONLY);
+    if (fd < 0)
+        error("Error\nFailed to open the file.\n");
+    char **map = read_map1(fd);
+    close(fd);
+    return map;
+}
+/* char	**read_map(char *filename)
 {
 	int		fd;
 	char	*line;
@@ -44,7 +82,7 @@ char	**read_map(char *filename)
 	map[lines] = NULL;
 
 	return (map);
-}
+} */
 
 void	print_map(char **map)
 {
@@ -329,6 +367,7 @@ int main(int argc, char **argv)
 {
     t_window win;
 
+	if(not_ends_with_ber(argv[1]))
     if (argc != 2)
         error("Error\nWrong number of arguments.\n");
     win.map = read_map(argv[1]);

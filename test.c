@@ -11,7 +11,21 @@ int	init_window(t_window *win)
 	height = 0;
 	while (win->map[height])
 		height++;
+    int w, h;
 	win->mlx = mlx_init();
+    mlx_get_screen_size(win->mlx, &w, &h);
+    if((height * 60) > h || (width * 60) > w)
+    {
+        mlx_destroy_display(win->mlx);
+        free(win->mlx);
+        for(int i = 0; win->map[i]; i++)
+        {
+            free(win->map[i]);
+        }
+        free(win->map);
+        win->map = NULL;
+        error("hahahah you cant do that :)");
+    }
 	if (!win->mlx)
 		return (1);
 	win->mlx_win = mlx_new_window(win->mlx, width * 60, height * 60, "so_long");
@@ -93,7 +107,6 @@ void render_map(t_window *win)
     mlx_put_image_to_window(win->mlx, win->mlx_win, win->img.player,
                             win->player_x * 60, win->player_y * 60);
 }
-
 
 void move_player(t_window *win, int new_x, int new_y)
 {

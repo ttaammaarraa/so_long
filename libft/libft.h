@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 16:28:07 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/01/29 23:17:39 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/08 16:00:39 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,5 @@ t_list				*ft_lstnew(void *content);
 t_list				*ft_lstlast(t_list *lst);
 void				ft_lstdelone(t_list *lst, void (*del)(void *));
 void				ft_lstadd_back(t_list **lst, t_list *new);
+int					ft_strcmp(const char *s1, const char *s2);
 #endif
