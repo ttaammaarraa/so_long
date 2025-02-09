@@ -6,51 +6,32 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 22:27:12 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/08 22:56:36 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/09 17:26:34 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	**read_map1( int fd)
+void	error(char *str)
 {
-	char	*line;
-	char	**map;
-	int		lines;
-
-	map = NULL;
-	lines = 0;
-	line = get_next_line(fd);
-	while (line)
-	{
-		if (line[0] == '\0')
-		{
-			free(line);
-			break ;
-		}
-		map = ft_realloc(map, lines * sizeof(char *), (lines + 2) * sizeof(char *));
-		if (!map)
-			error("Error\nMemory allocation failed.\n");
-		map[lines++] = line;
-		line = get_next_line(fd);
-	}
-	if (!map)
-		error("Error\nEmpty map file\n");
-	map[lines] = NULL;
-	return (map);
+	ft_putstr_fd(str, 2);
+	exit(EXIT_FAILURE);
 }
 
-char	**read_map(char	*filename)
+void	free_map(char **map)
 {
-	char	**map;
-	int		fd;
+	int	i;
 
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		error("Error\nFailed to open the file.\n");
-	map = read_map1 (fd);
-	close (fd);
-	return (map);
+	if (map)
+	{
+		i = 0;
+		while (map[i])
+		{
+			free(map[i]);
+			i++;
+		}
+		free(map);
+	}
 }
 
 /* char	**read_map(char *filename)
@@ -309,6 +290,7 @@ void	check_reachability(t_window *win)
 	char	**map_copy;
 	int		y;
     int     x;
+	
 	map_copy = copy_map(win->map);
 	if (!map_copy)
 	{
@@ -411,12 +393,7 @@ int	main(int argc, char **argv)
 	win.map = read_map(argv[1]);
 	if (!win.map)
 		error("Error\nFailed to load map.\n");
-	validate_map_chars(win.map);
-	rectangular(win.map);
-	check_wall_1(win.map);
-	is_valid_exit(win.map);
-	is_valid_collectable(win.map);
-	is_valid_player(win.map);
+	//checks(&win);
 	win.collectibles = count_collectibles(win.map);
 	find_player_position(&win);
 	win.moves = 0;

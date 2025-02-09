@@ -1,5 +1,19 @@
 #include "so_long.h"
-
+/* void	get_screen_size(t_window *win, int	*width, 	int	*height)
+{
+	int w;
+	int h;
+	win->mlx = mlx_init();
+	mlx_get_screen_size(win->mlx, &w, &h);
+	if ((height * 60) > h || (width * 60) > w)
+	{
+		mlx_destroy_display(win->mlx);
+		free(win->mlx);
+		free_map(win->map);
+		win->map = NULL;
+		error("hahahah you cant do that :)\n");
+	}
+} */
 int	init_window(t_window *win)
 {
 	int	height;
@@ -11,7 +25,9 @@ int	init_window(t_window *win)
 	height = 0;
 	while (win->map[height])
 		height++;
-	int w, h;
+	get_screen_size(&win);
+ 	int w;
+	int h;
 	win->mlx = mlx_init();
 	mlx_get_screen_size(win->mlx, &w, &h);
 	if ((height * 60) > h || (width * 60) > w)
@@ -19,11 +35,6 @@ int	init_window(t_window *win)
 		mlx_destroy_display(win->mlx);
 		free(win->mlx);
 		free_map(win->map);
-		/* for(int i = 0; win->map[i]; i++)
-		{
-			free(win->map[i]);
-		} */
-		// free(win->map);
 		win->map = NULL;
 		error("hahahah you cant do that :)\n");
 	}

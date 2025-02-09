@@ -6,33 +6,11 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 21:58:28 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/08 22:58:27 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/09 15:20:27 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	error(char *str)
-{
-	ft_putstr_fd(str, 2);
-	exit(EXIT_FAILURE);
-}
-
-void	free_map(char **map)
-{
-	int	i;
-
-	if (map)
-	{
-		i = 0;
-		while (map[i])
-		{
-			free(map[i]);
-			i++;
-		}
-		free(map);
-	}
-}
 
 int	not_ends_with_ber(const char *str)
 {
@@ -91,4 +69,57 @@ void	check_wall_2(char **map)
 		}
 		i++;
 	}
+}
+
+char	**copy_map(char **map)
+{
+	int		i;
+	int		j;
+	//int		k;
+	char	**copy;
+
+	i = 0;
+	copy = NULL;
+	while (map[i])
+		i++;
+	copy = malloc(sizeof(char *) * (i + 1));
+	if (!copy)
+		return (NULL);
+	j = 0;
+	while(j < i)
+	{
+		copy[j] = ft_strdup(map[j]);
+		if (!copy[j])
+		{
+			free_map(copy);
+			return (NULL);
+		}
+		j++;
+	}
+	copy[i] = NULL;
+	return (copy);
+}
+
+void	flood_fill(char **map, int x, int y)
+{
+	if (y < 0 || x < 0 || !map[y] || x >= (int)ft_strlen(map[y]))
+		return ;
+	if (map[y][x] == '1' || map[y][x] == 'V')
+		return ;
+	map[y][x] = 'V';
+	flood_fill(map, x + 1, y);
+	flood_fill(map, x - 1, y);
+	flood_fill(map, x, y + 1);
+	flood_fill(map, x, y - 1);
+}
+
+
+void	checks(t_window *win)
+{
+	validate_map_chars(win->map);
+	rectangular(win->map);
+	check_wall_1(win->map);
+	is_valid_exit(win->map);
+	is_valid_collectable(win->map);
+	is_valid_player(win->map);
 }

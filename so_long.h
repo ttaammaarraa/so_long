@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:02:28 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/08 22:23:10 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/09 14:57:36 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ void		move_player(t_window *win, int new_x, int new_y);
 void		check_reachability(t_window *win);
 char		**copy_map(char **map);
 void		flood_fill(char **map, int x, int y);
-
+void	checks(t_window *win);
+void	validate_map_chars(char **map);
 #endif
