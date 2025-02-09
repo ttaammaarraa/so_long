@@ -1,55 +1,58 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/08 22:27:12 by taabu-fe          #+#    #+#             */
+/*   Updated: 2025/02/08 22:56:36 by taabu-fe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-int	not_ends_with_ber(const char *str)
+char	**read_map1( int fd)
 {
-	size_t	len;
-	char	*dot;
-	dot = ft_strrchr(str, '.');
-	len = ft_strlen(str);
-	if (len < 4)
-		return (0);
-	if (!(ft_strcmp(dot, ".ber") == 0))
-		error("Error\nwqer");
-	return (0);
-}
-
-char **read_map1(int fd)
-{
-    char    *line;
-    char    **map;
-    int     lines;
+	char	*line;
+	char	**map;
+	int		lines;
 
 	map = NULL;
 	lines = 0;
-    line = get_next_line(fd);
-    while (line)
-    {
-        if (line[0] == '\0')
-        {
-            free(line);
-            break;
-        }
-        map = ft_realloc(map, lines * sizeof(char *), (lines + 2) * sizeof(char *));
-        if (!map)
-            error("Error\nMemory allocation failed.\n");
-        map[lines++] = line;
-        line = get_next_line(fd);
-    }
-    if (!map)
-        error("Error\nEmpty map file\n");
-    map[lines] = NULL;
-    return map;
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (line[0] == '\0')
+		{
+			free(line);
+			break ;
+		}
+		map = ft_realloc(map, lines * sizeof(char *), (lines + 2) * sizeof(char *));
+		if (!map)
+			error("Error\nMemory allocation failed.\n");
+		map[lines++] = line;
+		line = get_next_line(fd);
+	}
+	if (!map)
+		error("Error\nEmpty map file\n");
+	map[lines] = NULL;
+	return (map);
 }
 
-char **read_map(char *filename)
+char	**read_map(char	*filename)
 {
-    int fd = open(filename, O_RDONLY);
-    if (fd < 0)
-        error("Error\nFailed to open the file.\n");
-    char **map = read_map1(fd);
-    close(fd);
-    return map;
+	char	**map;
+	int		fd;
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		error("Error\nFailed to open the file.\n");
+	map = read_map1 (fd);
+	close (fd);
+	return (map);
 }
+
 /* char	**read_map(char *filename)
 {
 	int		fd;
@@ -84,7 +87,7 @@ char **read_map(char *filename)
 	return (map);
 } */
 
-void	print_map(char **map)
+/* void	print_map(char **map)
 {
 	int	i;
 
@@ -103,9 +106,9 @@ void	print_map(char **map)
 			ft_putstr_fd("NULL line found.\n", 2);
 		i++;
 	}
-}
+} */
 
-void	error(char *str)
+/* void	error(char *str)
 {
 	ft_putstr_fd(str, 2);
 	exit(EXIT_FAILURE);
@@ -125,9 +128,9 @@ void	free_map(char **map)
 		}
 		free(map);
 	}
-}
+} */
 
-void	rectangular(char **map)
+/* void	rectangular(char **map)
 {
 	int		i;
 	size_t	first_line;
@@ -153,9 +156,9 @@ void	rectangular(char **map)
 		free_map(map);
 		error("Error\ninvalid map\n");
 	}
-}
+} */
 
-void	is_valid_player(char **map)
+/* void	is_valid_player(char **map)
 {
 	int	i;
 	int	j;
@@ -231,9 +234,9 @@ void	is_valid_collectable(char **map)
 		free_map(map);
 		error("Error\nShould have one collectable at least in the game\n");
 	}
-}
+} */
 
-void	check_wall_1(char **map)
+/*void	check_wall_1(char **map)
 {
 	int	i;
 	int	width;
@@ -254,9 +257,9 @@ void	check_wall_1(char **map)
 		i++;
 	}
 	check_wall_2(map);
-}
+}*/
 
-void	check_wall_2(char **map)
+/* void	check_wall_2(char **map)
 {
 	int	i;
 	int	width;
@@ -276,30 +279,63 @@ void	check_wall_2(char **map)
 		}
 		i++;
 	}
-}
+} */
 
-void validate_map_chars(char **map)
+void	validate_map_chars(char **map)
 {
-    int y = 0, x;
-    while (map[y])
-    {
-        x = 0;
-        while (map[y][x])
-        {
-            if (map[y][x] != '1' && map[y][x] != '0' &&
-                map[y][x] != 'P' && map[y][x] != 'C' &&
-                map[y][x] != 'E' && map[y][x] != '\n')
-            {
-                free_map(map);
-                error("Error\nInvalid character in map.\n");
-            }
-            x++;
-        }
-        y++;
-    }
+	int	y;
+	int	x;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] != '1' && map[y][x] != '0' &&
+				map[y][x] != 'P' && map[y][x] != 'C' &&
+				map[y][x] != 'E' && map[y][x] != '\n')
+			{
+				free_map(map);
+				error("Error\nInvalid character in map.\n");
+			}
+			x++;
+		}
+		y++;
+	}
+}
+void	check_reachability(t_window *win)
+{
+	char	**map_copy;
+	int		y;
+    int     x;
+	map_copy = copy_map(win->map);
+	if (!map_copy)
+	{
+		free_map(win->map);
+		error("Error\nMemory allocation failed in check_reachability.\n");
+	}
+	flood_fill(map_copy, win->player_x, win->player_y);
+	y = 0;
+	while (map_copy[y])
+	{
+		x = 0;
+		while (map_copy[y][x])
+		{
+			if (map_copy[y][x] == 'C' || map_copy[y][x] == 'E')
+			{
+				free_map(map_copy);
+				free_map(win->map);
+				error("Error\nNot all collectibles or the exit are reachable.\n");
+			}
+			x++;
+		}
+		y++;
+	}
+	free_map(map_copy);
 }
 
-char **copy_map(char **map)
+/* char **copy_map(char **map)
 {
     int i = 0;
     char **copy = NULL;
@@ -362,37 +398,39 @@ void check_reachability(t_window *win)
         y++;
     }
     free_map(map_copy);
-}
-int main(int argc, char **argv)
-{
-    t_window win;
+} */
 
-	if(not_ends_with_ber(argv[1]))
-    if (argc != 2)
-        error("Error\nWrong number of arguments.\n");
-    win.map = read_map(argv[1]);
-    if (!win.map)
-        error("Error\nFailed to load map.\n");
-    validate_map_chars(win.map);
-    rectangular(win.map);
-    check_wall_1(win.map);
-    is_valid_exit(win.map);
-    is_valid_collectable(win.map);
-    is_valid_player(win.map);
-    win.collectibles = count_collectibles(win.map);
-    find_player_position(&win);
-    win.moves = 0;
-    check_reachability(&win);
-    if (init_window(&win))
-    {
-        free_map(win.map);
-        return (1);
-    }
-    load_images(&win);
-    render_map(&win);
-    mlx_hook(win.mlx_win, 2, 1L << 0, key_hook, &win);
+int	main(int argc, char **argv)
+{
+	t_window	win;
+
+	if (not_ends_with_ber(argv[1]))
+		return (0);
+	if (argc != 2)
+		error ("Error\nWrong number of arguments.\n");
+	win.map = read_map(argv[1]);
+	if (!win.map)
+		error("Error\nFailed to load map.\n");
+	validate_map_chars(win.map);
+	rectangular(win.map);
+	check_wall_1(win.map);
+	is_valid_exit(win.map);
+	is_valid_collectable(win.map);
+	is_valid_player(win.map);
+	win.collectibles = count_collectibles(win.map);
+	find_player_position(&win);
+	win.moves = 0;
+	check_reachability(&win);
+	if (init_window(&win))
+	{
+		free_map(win.map);
+		return (1);
+	}
+	load_images(&win);
+	render_map(&win);
+	mlx_hook(win.mlx_win, 2, 1L << 0, key_hook, &win);
 	mlx_hook(win.mlx_win, 17, 0, close_window, &win);
-    mlx_loop(win.mlx);
-    free_map(win.map);
-    return (0);
+	mlx_loop(win.mlx);
+	free_map(win.map);
+	return (0);
 }
