@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 22:18:15 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/09 15:19:57 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:10:06 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	move_player(t_window *win, int new_x, int new_y)
 	{
 		if (win->collectibles == 0)
 		{
+			ft_printf("Moves: %d\n", ++win->moves);
 			close_window(win);
 			return ;
 		}
@@ -32,8 +33,7 @@ void	move_player(t_window *win, int new_x, int new_y)
 	win->player_x = new_x;
 	win->player_y = new_y;
 	win->moves++;
-	//انتبهي برنت اف
-	//ft_printf("Moves: %d\n", win->moves);
+	ft_printf("Moves: %d\n", win->moves);
 	render_map(win);
 }
 

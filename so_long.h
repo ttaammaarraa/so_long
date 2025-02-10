@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:02:28 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/09 14:57:36 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:44:56 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "./get_next_line/get_next_line.h"
 # include "./libft/libft.h"
+# include "./ft_printf/ft_printf.h"
 # include "./minilibx-linux/mlx.h"
 //#include <mlx.h>
 # include <X11/keysym.h>
@@ -50,11 +51,10 @@ typedef struct s_window
 	char	**map;
 }			t_window;
 
-void		error(char *str);
+
 int			not_ends_with_ber(const char *str);
 char		**read_map(char *filename);
-void		print_map(char **map);
-void		error(char *str);
+void		error(char *str, char **map);
 void		free_map(char **map);
 void		rectangular(char **map);
 void		is_valid_player(char **map);
@@ -67,14 +67,12 @@ void		render_map(t_window *win);
 int			key_hook(int keycode, t_window *win);
 int			close_window(t_window *win);
 int			init_window(t_window *win);
-int			key_hook1(int keycode, t_window *win);
 void		find_player_position(t_window *win);
 int			count_collectibles(char **map);
 void		load_images(t_window *win);
 void		render_map(t_window *win);
 void		move_player(t_window *win, int x, int y);
 int			key_hook(int keycode, t_window *win);
-int			key_hook1(int keycode, t_window *win);
 void		render_map(t_window *win);
 void		free_map(char **map);
 char		**read_map1(int fd);
@@ -84,6 +82,7 @@ void		move_player(t_window *win, int new_x, int new_y);
 void		check_reachability(t_window *win);
 char		**copy_map(char **map);
 void		flood_fill(char **map, int x, int y);
-void	checks(t_window *win);
-void	validate_map_chars(char **map);
+void		checks(t_window *win);
+void		validate_map_chars(char **map);
+void		check_size(t_window *win, int height, int width);
 #endif

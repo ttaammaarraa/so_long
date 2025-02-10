@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 21:58:28 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/09 15:20:27 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:19:05 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	not_ends_with_ber(const char *str)
 	if (len < 4)
 		return (0);
 	if (!(ft_strcmp(dot, ".ber") == 0))
-		error("Error\ninvalid expression\n");
+		error("Error\ninvalid expression\n", NULL);
 	return (0);
 }
 
@@ -40,10 +40,7 @@ void	check_wall_1(char **map)
 	while (i < width)
 	{
 		if (map[0][i] != '1' || map[height - 1][i] != '1')
-		{
-			free_map(map);
-			error("Error\nMap is not closed by walls\n");
-		}
+			error("Error\nMap is not closed by walls\n", map);
 		i++;
 	}
 	check_wall_2(map);
@@ -63,10 +60,7 @@ void	check_wall_2(char **map)
 	while (i < height)
 	{
 		if (map[i][0] != '1' || map[i][width - 1] != '1')
-		{
-			free_map(map);
-			error("Error\nMap is not closed by walls\n");
-		}
+			error("Error\nMap is not closed by walls\n", map);
 		i++;
 	}
 }
@@ -75,7 +69,6 @@ char	**copy_map(char **map)
 {
 	int		i;
 	int		j;
-	//int		k;
 	char	**copy;
 
 	i = 0;
@@ -86,7 +79,7 @@ char	**copy_map(char **map)
 	if (!copy)
 		return (NULL);
 	j = 0;
-	while(j < i)
+	while (j < i)
 	{
 		copy[j] = ft_strdup(map[j]);
 		if (!copy[j])
@@ -111,15 +104,4 @@ void	flood_fill(char **map, int x, int y)
 	flood_fill(map, x - 1, y);
 	flood_fill(map, x, y + 1);
 	flood_fill(map, x, y - 1);
-}
-
-
-void	checks(t_window *win)
-{
-	validate_map_chars(win->map);
-	rectangular(win->map);
-	check_wall_1(win->map);
-	is_valid_exit(win->map);
-	is_valid_collectable(win->map);
-	is_valid_player(win->map);
 }

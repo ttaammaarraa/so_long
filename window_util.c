@@ -1,19 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   window_util.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/10 11:18:42 by taabu-fe          #+#    #+#             */
+/*   Updated: 2025/02/10 12:42:59 by taabu-fe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
-/* void	get_screen_size(t_window *win, int	*width, 	int	*height)
-{
-	int w;
-	int h;
-	win->mlx = mlx_init();
-	mlx_get_screen_size(win->mlx, &w, &h);
-	if ((height * 60) > h || (width * 60) > w)
-	{
-		mlx_destroy_display(win->mlx);
-		free(win->mlx);
-		free_map(win->map);
-		win->map = NULL;
-		error("hahahah you cant do that :)\n");
-	}
-} */
+
 int	init_window(t_window *win)
 {
 	int	height;
@@ -25,19 +23,8 @@ int	init_window(t_window *win)
 	height = 0;
 	while (win->map[height])
 		height++;
-	get_screen_size(&win);
- 	int w;
-	int h;
 	win->mlx = mlx_init();
-	mlx_get_screen_size(win->mlx, &w, &h);
-	if ((height * 60) > h || (width * 60) > w)
-	{
-		mlx_destroy_display(win->mlx);
-		free(win->mlx);
-		free_map(win->map);
-		win->map = NULL;
-		error("hahahah you cant do that :)\n");
-	}
+	check_size(win, height, width);
 	if (!win->mlx)
 		return (1);
 	win->mlx_win = mlx_new_window(win->mlx, width * 60, height * 60, "so_long");
@@ -47,21 +34,6 @@ int	init_window(t_window *win)
 		free(win->mlx);
 		return (1);
 	}
-	return (0);
-}
-
-int	close_window(t_window *win)
-{
-	mlx_destroy_image(win->mlx, win->img.floor);
-	mlx_destroy_image(win->mlx, win->img.wall);
-	mlx_destroy_image(win->mlx, win->img.player);
-	mlx_destroy_image(win->mlx, win->img.collectable);
-	mlx_destroy_image(win->mlx, win->img.exit);
-	mlx_destroy_window(win->mlx, win->mlx_win);
-	mlx_destroy_display(win->mlx);
-	free(win->mlx);
-	free_map(win->map);
-	exit(EXIT_SUCCESS);
 	return (0);
 }
 
@@ -80,7 +52,25 @@ void	load_images(t_window *win)
 	if (!win->img.player || !win->img.wall || !win->img.floor
 		|| !win->img.collectable || !win->img.exit)
 	{
-		error("Error\nFailed to load one or more images.\n");
+		error("Error\nFailed to load one or more images.\n", NULL);
+	}
+}
+
+void	render_map_1(t_window *win, int x, int y, void **img)
+{
+	if (win->map[y][x] == '\n')
+		return ;
+	*img = win->img.floor;
+	if (win->map[y][x] == '1')
+		*img = win->img.wall;
+	else if (win->map[y][x] == 'C')
+		*img = win->img.collectable;
+	else if (win->map[y][x] == 'E')
+	{
+		if (win->collectibles == 0)
+			*img = win->img.exit;
+		else
+			*img = win->img.floor;
 	}
 }
 
@@ -92,30 +82,14 @@ void	render_map(t_window *win)
 
 	img = NULL;
 	if (!win->map)
-	{
-		free_map(win->map);
-		error("Error\nMap is not initialized.\n");
-	}
+		error("Error\nMap is not initialized.\n", win->map);
 	y = 0;
 	while (win->map[y])
 	{
 		x = 0;
 		while (win->map[y][x])
 		{
-			if (win->map[y][x] == '\n')
-				break ;
-			img = win->img.floor;
-			if (win->map[y][x] == '1')
-				img = win->img.wall;
-			else if (win->map[y][x] == 'C')
-				img = win->img.collectable;
-			else if (win->map[y][x] == 'E')
-			{
-				if (win->collectibles == 0)
-					img = win->img.exit;
-				else
-					img = win->img.floor;
-			}
+			render_map_1(win, x, y, &img);
 			mlx_put_image_to_window(win->mlx, win->mlx_win, img, x * 60, y
 				* 60);
 			x++;
@@ -126,54 +100,6 @@ void	render_map(t_window *win)
 		win->player_x * 60, win->player_y * 60);
 }
 
-/* void move_player(t_window *win, int new_x, int new_y)
-{
-	if (win->map[new_y][new_x] == '1')
-		return ;
-	if (win->map[new_y][new_x] == 'C')
-	{
-		win->collectibles--;
-		win->map[new_y][new_x] = '0';
-	}
-	if (win->map[new_y][new_x] == 'E')
-	{
-		if (win->collectibles == 0)
-		{
-			close_window(win);
-			return ;
-		}
-	}
-	win->player_x = new_x;
-	win->player_y = new_y;
-	win->moves++;
-	//انتبهي برنت اف
-	printf("Moves: %d\n", win->moves);
-	render_map(win);
-}
-
-void	find_player_position(t_window *win)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (win->map[y])
-	{
-		x = 0;
-		while (win->map[y][x])
-		{
-			if (win->map[y][x] == 'P')
-			{
-				win->player_x = x;
-				win->player_y = y;
-				win->map[y][x] = '0';
-				return ;
-			}
-			x++;
-		}
-		y++;
-	}
-} */
 int	key_hook(int keycode, t_window *win)
 {
 	if (keycode == XK_Escape || keycode == XK_q)

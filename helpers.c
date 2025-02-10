@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 21:38:48 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/09 15:05:03 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:20:19 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,17 @@ void	rectangular(char **map)
 	i = 1;
 	first_line = ft_strlen(map[0]);
 	if (!first_line || first_line == 1)
-	{
-		free_map(map);
-		error("Error\ninvalid map\n");
-	}
+		error("Error\ninvalid map\n", map);
 	while (map[i])
 	{
 		if (ft_strlen(map[i]) != first_line)
-		{
-			free_map(map);
-			error("Error\nnot rectangular\n");
-		}
+			error("Error\nnot rectangular\n", map);
 		i++;
 	}
 	if (i < 3)
-	{
-		free_map(map);
-		error("Error\ninvalid map\n");
-	}
+		error("Error\ninvalid map\n", map);
 }
+
 void	is_valid_player(char **map)
 {
 	int	i;
@@ -59,10 +51,7 @@ void	is_valid_player(char **map)
 		i++;
 	}
 	if (p == 0 || p > 1)
-	{
-		free_map(map);
-		error("Error\nShould have one player in the game\n");
-	}
+		error("Error\nShould have one player in the game\n", map);
 }
 
 void	is_valid_exit(char **map)
@@ -85,10 +74,7 @@ void	is_valid_exit(char **map)
 		i++;
 	}
 	if (e == 0 || e > 1)
-	{
-		free_map(map);
-		error("Error\nShould have one exit in the game\n");
-	}
+		error("Error\nShould have one exit in the game\n", map);
 }
 
 void	is_valid_collectable(char **map)
@@ -111,16 +97,14 @@ void	is_valid_collectable(char **map)
 		i++;
 	}
 	if (c == 0)
-	{
-		free_map(map);
-		error("Error\nShould have one collectable at least in the game\n");
-	}
+		error("Error\nShould have one collectable at least in the game\n", map);
 }
+
 int	count_collectibles(char **map)
 {
-	int x;
-	int y;
-	int count;
+	int	x;
+	int	y;
+	int	count;
 
 	count = 0;
 	y = 0;
