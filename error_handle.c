@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 21:58:28 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/10 13:32:00 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:23:18 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ int	not_ends_with_ber(const char *str)
 	char	*dot;
 
 	dot = ft_strrchr(str, '.');
+	if (!dot)
+		error_without_free("Error\nYOU DONT HAVE DOT IN THE EXPRESSION\n");
 	len = ft_strlen(str);
 	if (len < 4)
 		return (0);
 	if (!(ft_strcmp(dot, ".ber") == 0))
-		error("Error\ninvalid expression\n", NULL);
+		error_without_free("Error\ninvalid expression\n");
 	return (0);
 }
 

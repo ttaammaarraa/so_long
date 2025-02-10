@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:02:28 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/10 13:45:20 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:10:26 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,6 @@ char		**copy_map(char **map);
 void		flood_fill(char **map, int x, int y);
 void		checks(t_window *win);
 void		validate_map_chars(char **map);
+void		error_without_free(char *str);
 void		check_size(t_window *win, int height, int width);
 #endif

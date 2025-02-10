@@ -6,11 +6,17 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:40:30 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/10 13:32:30 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:09:16 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	error_without_free(char *str)
+{
+	ft_putstr_fd(str, 2);
+	exit(EXIT_FAILURE);
+}
 
 void	checks(t_window *win)
 {

@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 22:27:12 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/10 17:02:52 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:17:34 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,12 @@ int	main(int argc, char **argv)
 	t_window	win;
 
 	if (argc != 2)
-		error("Error\nWrong number of arguments.\n", NULL);
+		error_without_free("Error\nWrong number of arguments.\n");
 	if (not_ends_with_ber(argv[1]))
 		return (0);
 	win.map = read_map(argv[1]);
 	if (!win.map)
-		error("Error\nFailed to load map.\n", NULL);
+		error_without_free("Error\nFailed to load map.\n");
 	checks(&win);
 	win.collectibles = count_collectibles(win.map);
 	find_player_position(&win);
