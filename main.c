@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 22:27:12 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/10 12:54:12 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:27:23 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	error(char *str, char **map)
 {
 	if (map || *map)
 		free_map(map);
-	map = NULL;
+	//map = NULL;
 	ft_putstr_fd(str, 2);
 	exit(EXIT_FAILURE);
 }
@@ -90,10 +90,11 @@ int	main(int argc, char **argv)
 {
 	t_window	win;
 
+	if (argc != 2)
+		//ft_printf("Error\nWrong number of arguments.\n");
+		error("Error\nWrong number of arguments.\n", NULL);
 	if (not_ends_with_ber(argv[1]))
 		return (0);
-	if (argc != 2)
-		error("Error\nWrong number of arguments.\n", NULL);
 	win.map = read_map(argv[1]);
 	if (!win.map)
 		error("Error\nFailed to load map.\n", NULL);

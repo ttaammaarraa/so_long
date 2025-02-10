@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:02:28 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/10 12:44:56 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:45:20 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "./libft/libft.h"
 # include "./ft_printf/ft_printf.h"
 # include "./minilibx-linux/mlx.h"
-//#include <mlx.h>
+//# include <mlx.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -63,18 +63,12 @@ void		is_valid_collectable(char **map);
 void		check_wall_1(char **map);
 void		check_wall_2(char **map);
 void		load_images(t_window *win);
-void		render_map(t_window *win);
 int			key_hook(int keycode, t_window *win);
 int			close_window(t_window *win);
 int			init_window(t_window *win);
-void		find_player_position(t_window *win);
-int			count_collectibles(char **map);
 void		load_images(t_window *win);
-void		render_map(t_window *win);
-void		move_player(t_window *win, int x, int y);
 int			key_hook(int keycode, t_window *win);
 void		render_map(t_window *win);
-void		free_map(char **map);
 char		**read_map1(int fd);
 int			count_collectibles(char **map);
 void		find_player_position(t_window *win);
