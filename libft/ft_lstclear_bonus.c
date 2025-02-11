@@ -15,13 +15,12 @@
 /*  void    ft_del(void *content)
 {
 	t_list	*temp;
+	t_list	*temp;
 
 	content = NULL;
 } */
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_list	*temp;
-
 	temp = *lst;
 	if (!lst)
 		return ;

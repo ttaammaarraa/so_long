@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:20:28 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/01/30 14:12:17 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/11 11:22:47 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	if(!s)
+	if (!s)
 		return (0);
 	while (s[i] != '\0')
 		i++;

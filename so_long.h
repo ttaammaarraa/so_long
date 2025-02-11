@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:02:28 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/10 17:10:26 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/11 11:24:52 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct s_window
 	t_data	img;
 	char	**map;
 }			t_window;
-
 
 int			not_ends_with_ber(const char *str);
 char		**read_map(char *filename);

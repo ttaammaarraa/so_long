@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 22:27:12 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/10 17:17:34 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/11 09:27:07 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	error(char *str, char **map)
 {
-	if (map || *map)
+	if (map && *map)
 		free_map(map);
 	map = NULL;
 	ft_putstr_fd(str, 2);
