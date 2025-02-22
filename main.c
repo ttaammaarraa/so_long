@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 22:27:12 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/11 09:27:07 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/22 20:22:44 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	check_reachability(t_window *win)
 			if (map_copy[y][x] == 'C' || map_copy[y][x] == 'E')
 			{
 				free_map(map_copy);
-				error("Error\nNot all collectibles or the exit are reachable.\n",
+				error("Error\nNot all collectibles or the exit are reachable\n",
 					win->map);
 			}
 			x++;

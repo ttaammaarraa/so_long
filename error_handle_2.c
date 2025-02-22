@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:40:30 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/11 09:38:28 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/22 20:47:14 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,26 @@ int	close_window(t_window *win)
 	mlx_destroy_image(win->mlx, win->img.player);
 	mlx_destroy_image(win->mlx, win->img.collectable);
 	mlx_destroy_image(win->mlx, win->img.exit);
+	mlx_destroy_window(win->mlx, win->mlx_win);
+	mlx_destroy_display(win->mlx);
+	free(win->mlx);
+	free_map(win->map);
+	exit(EXIT_SUCCESS);
+	return (0);
+}
+
+int	not_load_images(t_window *win)
+{
+	if (win->img.floor)
+		mlx_destroy_image(win->mlx, win->img.floor);
+	if (win->img.wall)
+		mlx_destroy_image(win->mlx, win->img.wall);
+	if (win->img.player)
+		mlx_destroy_image(win->mlx, win->img.player);
+	if (win->img.collectable)
+		mlx_destroy_image(win->mlx, win->img.collectable);
+	if (win->img.exit)
+		mlx_destroy_image(win->mlx, win->img.exit);
 	mlx_destroy_window(win->mlx, win->mlx_win);
 	mlx_destroy_display(win->mlx);
 	free(win->mlx);

@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:02:28 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/11 11:24:52 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/22 20:48:06 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,5 @@ void		checks(t_window *win);
 void		validate_map_chars(char **map);
 void		error_without_free(char *str);
 void		check_size(t_window *win, int height, int width);
+int			not_load_images(t_window *win);
 #endif

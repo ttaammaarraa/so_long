@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:25:56 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/01/12 13:27:55 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/22 20:55:59 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 } */
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
+	t_list	*temp;
+
 	temp = *lst;
 	if (!lst)
 		return ;

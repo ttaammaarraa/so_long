@@ -6,7 +6,7 @@
 /*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:18:42 by taabu-fe          #+#    #+#             */
-/*   Updated: 2025/02/11 09:38:25 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/02/22 20:48:29 by taabu-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	load_images(t_window *win)
 	if (!win->img.player || !win->img.wall || !win->img.floor
 		|| !win->img.collectable || !win->img.exit)
 	{
+		not_load_images(win);
 		error_without_free("Error\nFailed to load one or more images.\n");
 	}
 }
