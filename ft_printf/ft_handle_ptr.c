@@ -14,7 +14,7 @@
 
 int	ft_handle_ptr(void *ptr)
 {
-	int	c;	
+	int	c;
 
 	if (!ptr)
 	{

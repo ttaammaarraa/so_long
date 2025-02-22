@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"ft_printf.h"
+#include "ft_printf.h"
 
 int	ft_print_hex(unsigned long num, const char format)
 {
 	char	*hex_lower;
 	char	*hex_upper;
 	char	*hex;
-	int		write_i;	
+	int		write_i;
 
 	write_i = 0;
 	hex_lower = "0123456789abcdef";

@@ -36,10 +36,10 @@ static int	ft_handle_format(const char *format, va_list arg)
 
 int	ft_printf(const char *format, ...)
 {
-	va_list		arg;
-	int			count;
+	va_list	arg;
+	int		count;
 
-	va_start (arg, format);
+	va_start(arg, format);
 	count = 0;
 	while (*format)
 	{
